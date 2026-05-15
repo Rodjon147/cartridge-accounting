@@ -38,7 +38,7 @@ nav {
   border-radius: 8px;
 }
 
-.nav-link:hover {
+.nav-link:hover:not(.active) {
   background: #374151;
 }
 
