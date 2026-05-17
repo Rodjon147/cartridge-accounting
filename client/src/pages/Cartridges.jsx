@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
 import api from "../api/api"
+import AddCartridgeModal from "../components/ui/AddCartridgeModal"
 
 function Cartridges() {
 
   const [cartridges, setCartridges] = useState([])
   const [loading, setLoading] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchCartridges = async () => {
     try {
@@ -53,9 +55,10 @@ function Cartridges() {
 
   return (
     <div>
-      <h2 className="page-title">
-          Картриджи
-      </h2>
+      <div className="page-header">
+        <h2 className="page-title">Картриджи</h2>
+        <button className="add-btn" onClick={() => setIsModalOpen(true)}>Добавить</button>
+      </div>
 
       <div className="table-container">
 
@@ -113,7 +116,11 @@ function Cartridges() {
       </table>
 
       </div>
-
+      {
+        isModalOpen && (
+            <AddCartridgeModal closeModal={() => setIsModalOpen(false)} refreshCartridges={fetchCartridges}/>
+        )
+      }
     </div>
     )
 }
