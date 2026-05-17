@@ -1,8 +1,63 @@
+import { useEffect, useState } from "react"
+import api from "../api/api"
 
 function Dashboard() {
+
+  const [stats, setStats] = useState({
+      totalCartridges: 0,
+      lowStock: 0,
+      totalPrinters: 0
+  })
+
+  useEffect(() => {
+    const loadStats = async () => {
+
+      try {
+
+        const response = await api.get("/dashboard/stats")
+        setStats(response.data)
+
+      } catch (error) {
+
+        console.error(error)
+
+      }
+    }
+
+    loadStats()
+
+    }, [])
+
+
   return (
     <div>
-      <h2>Дашборд</h2>
+      <h2 className="page-title">Дашборд</h2>
+
+      <div className="stats-grid">
+
+        <div className="stat-card">
+
+          <h3>Всего картриджей</h3>
+          <p> {stats.totalCartridges} </p>
+
+        </div>
+
+        <div className="stat-card warning">
+
+            <h3>Заканчиваются</h3>
+            <p>{stats.lowStock}</p>
+
+        </div>
+
+        <div className="stat-card">
+
+            <h3>Принтеров</h3>
+            <p>{stats.totalPrinters}</p>
+
+        </div>
+
+      </div>
+
     </div>
   )
 }
