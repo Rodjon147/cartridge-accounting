@@ -4,14 +4,16 @@ const cors = require("cors")
 
 const database = require("./database")
 
-const cartridgeRoutes = require("./routes/cartridgeRoutes");
+const cartridgeRoutes = require("./routes/cartridgeRoutes")
+const dashboardRoutes = require("./routes/dashboardRoutes")
 
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 
-app.use("/api/cartridges", cartridgeRoutes);
+app.use("/api/cartridges", cartridgeRoutes)
+app.use("/api/dashboard", dashboardRoutes)
 
 app.get("/", (req,res) => {
     res.json({ message: "Server is working"})
