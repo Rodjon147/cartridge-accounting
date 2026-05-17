@@ -204,3 +204,27 @@ nav {
 
   cursor: pointer;
 }
+
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  padding: 8px 12px;
+
+  border: none;
+
+  background: #f59e0b;
+
+  color: white;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  opacity: 0.9;
+}

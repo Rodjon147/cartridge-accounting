@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import api from "../api/api"
 import AddCartridgeModal from "../components/ui/AddCartridgeModal"
+import EditCartridgeModal from "../components/ui/EditCartridgeModal"
 
 function Cartridges() {
 
@@ -115,7 +116,12 @@ function Cartridges() {
       </div>
       {
         isModalOpen && (
-            <AddCartridgeModal closeModal={() => setIsModalOpen(false)} refreshCartridges={fetchCartridges}/>
+          <AddCartridgeModal closeModal={() => setIsModalOpen(false)} refreshCartridges={fetchCartridges}/>
+        )
+      }
+      {
+        editingCartridge && (
+          <EditCartridgeModal cartridge={editingCartridge} closeModal={() => setEditingCartridge(null)} refreshCartridges={fetchCartridges}/>
         )
       }
     </div>

@@ -9,7 +9,7 @@ function EditCartridgeModal({cartridge, closeModal, refreshCartridges}) {
         printer: cartridge.printer,
         qty: cartridge.qty,
         min_qty: cartridge.min_qty,
-        refill_date: cartridge.refill_date || "",
+        refill_date: cartridge.refill_date ? cartridge.refill_date.split("T")[0]: "",
         note: cartridge.note || ""
     })
 
