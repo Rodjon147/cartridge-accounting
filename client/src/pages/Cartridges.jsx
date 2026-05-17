@@ -6,7 +6,8 @@ function Cartridges() {
 
   const [cartridges, setCartridges] = useState([])
   const [loading, setLoading] = useState(true)
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [editingCartridge, setEditingCartridge] = useState(null)
 
   const fetchCartridges = async () => {
     try {
@@ -40,6 +41,7 @@ function Cartridges() {
     }
   }
 
+  const openEditModal = (cartridge) => { setEditingCartridge(cartridge) }
 
   useEffect(() => {
     const loadCartridges = async () => {
@@ -94,16 +96,11 @@ function Cartridges() {
 
               <td>{cartridge.min_qty}</td>
 
-              <td>
+              <td className="actions-cell">
 
-                  <button
-                      className="delete-btn"
-                      onClick={() =>
-                          deleteCartridge(cartridge.id)
-                      }
-                  >
-                      Удалить
-                  </button>
+                <button className="edit-btn" onClick={() => openEditModal(cartridge)}> Изменить </button>
+
+                <button className="delete-btn" onClick={() => deleteCartridge(cartridge.id)}> Удалить </button>
 
               </td>
 
