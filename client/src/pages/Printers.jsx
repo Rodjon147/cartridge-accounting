@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import api from "../api/api"
 import AddPrinterModal from "../components/ui/AddPrinterModal"
+import EditPrinterModal from "../components/ui/EditPrinterModal"
 
 function Printers() {
   const [printers, setPrinters] = useState([])
@@ -108,6 +109,13 @@ function Printers() {
         </table>
       </div>
       {isModalOpen && <AddPrinterModal closeModal={() => setIsModalOpen(false)} refreshPrinters={fetchPrinters} />}
+      {editingPrinter && (
+        <EditPrinterModal
+          printer={editingPrinter}
+          closeModal={() => setEditingPrinter(null)}
+          refreshPrinters={fetchPrinters}
+        />
+      )}
     </div>
   )
 }
