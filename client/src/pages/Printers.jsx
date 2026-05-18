@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-
 import api from "../api/api"
+import AddPrinterModal from "../components/ui/AddPrinterModal"
 
 function Printers() {
   const [printers, setPrinters] = useState([])
-
   const [loading, setLoading] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const fetchPrinters = async () => {
     try {
@@ -48,8 +48,7 @@ function Printers() {
     <div>
       <div className="page-header">
         <h2 className="page-title">Принтеры</h2>
-
-        <button className="add-btn">Добавить</button>
+        <button className="add-btn" onClick={() => setIsModalOpen(true)} />
       </div>
 
       <div className="table-container">
@@ -90,10 +89,7 @@ function Printers() {
                 <td className="actions-cell">
                   <button className="edit-btn">Изменить</button>
 
-                  <button
-                    className="delete-btn"
-                    onClick={() => deletePrinter(printer.id)}
-                  >
+                  <button className="delete-btn" onClick={() => deletePrinter(printer.id)}>
                     Удалить
                   </button>
                 </td>
@@ -102,6 +98,7 @@ function Printers() {
           </tbody>
         </table>
       </div>
+      {isModalOpen && <AddPrinterModal closeModal={() => setIsModalOpen(false)} refreshPrinters={fetchPrinters} />}
     </div>
   )
 }
