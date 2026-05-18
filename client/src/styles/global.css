@@ -266,3 +266,11 @@ nav {
 .warning {
   border-left: 6px solid #f59e0b;
 }
+
+.cartridge-table td {
+  vertical-align: middle;
+}
+
+.cartridge-table tr:hover {
+  background: #f9fafb;
+}
