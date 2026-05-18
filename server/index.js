@@ -6,6 +6,7 @@ const database = require("./database")
 
 const cartridgeRoutes = require("./routes/cartridgeRoutes")
 const dashboardRoutes = require("./routes/dashboardRoutes")
+const printerRoutes = require("./routes/printerRoutes")
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(express.json())
 
 app.use("/api/cartridges", cartridgeRoutes)
 app.use("/api/dashboard", dashboardRoutes)
+app.use("/api/printers", printerRoutes)
 
 app.get("/", (req,res) => {
     res.json({ message: "Server is working"})
