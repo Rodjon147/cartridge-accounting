@@ -48,7 +48,7 @@ function Printers() {
     <div>
       <div className="page-header">
         <h2 className="page-title">Принтеры</h2>
-        <button className="add-btn" onClick={() => setIsModalOpen(true)} />
+        <button className="add-btn" onClick={() => setIsModalOpen(true)}>Добавить</button>
       </div>
 
       <div className="table-container">
