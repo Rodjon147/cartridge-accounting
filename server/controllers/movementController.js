@@ -27,14 +27,21 @@ exports.createMovement = (req, res) => {
     if (action_type === "Поступление" || action_type === "Заправка") {
       qtyChange = +quantity
     }
+    const checkQtySql = "SELECT qty FROM cartridges WHERE id = ?"
+    
+    db.query(checkQtySql, [cartridge_id], (err, qtyResult) => {
+      if (err) return res.status(500).json(err)
 
-    const updateQtySql = "UPDATE cartridges SET qty = qty + ? WHERE id = ?"
+      const currentQty = qtyResult[0].qty
+      const newQty = currentQty + qtyChange
 
-    db.query(updateQtySql, [qtyChange, cartridge_id], (err, updateResult) => {
-      if (err) res.status(500).json(err)
+      if (newQty < 0) return res.status(400).json({message: "Недостаточно картриджей на складе"})
 
-      res.status(201).json({
-        message: "Movement created and stock updated",
+      const updateQtySql = "UPDATE cartridges SET qty = qty + ? WHERE id = ?"
+      db.query(updateQtySql, [qtyChange, cartridge_id], (err, updateResult) => {
+        if (err) res.status(500).json(err)
+
+        res.status(201).json({message: "Movement created and stock updated"})
       })
     })
   })
