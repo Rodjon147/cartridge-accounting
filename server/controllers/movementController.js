@@ -1,4 +1,4 @@
-const db = require("../config/db")
+const db = require("../database")
 
 exports.getAllMovements = (req, res) => {
   const sql = "SELECT movements.*, cartridges.model AS cartridge_model FROM movements JOIN cartridges ON movements.cartridge_id = cartridges.id ORDER BY movement_date DESC"
