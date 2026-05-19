@@ -47,7 +47,6 @@ function Movement() {
       <div className="page-header">
         <h2 className="page-title">Движение картриджей</h2>
 
-        <button className="add-btn">Добавить операцию</button>
       </div>
 
       <div className="table-container">

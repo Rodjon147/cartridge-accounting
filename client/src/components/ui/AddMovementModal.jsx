@@ -1,34 +1,18 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import api from "../../api/api"
 
-function AddMovementModal({ closeModal, refreshMovements }) {
-  const [cartridges, setCartridges] = useState([])
-
+function AddMovementModal({ cartridge, closeModal, refreshCartridges }) {
   const [formData, setFormData] = useState({
-    cartridge_id: "",
+    cartridge_id: cartridge.id,
     action_type: "Выдача",
     to_location: "",
     quantity: 1,
     comment: "",
   })
 
-  useEffect(() => {
-    const loadCartridges = async () => {
-      try {
-        const response = await api.get("/cartridges")
-
-        setCartridges(response.data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    loadCartridges()
-  }, [])
-
   const handleChange = (e) => {
-    setFormData({...formData,[e.target.name]: e.target.value})
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e) => {
@@ -37,9 +21,9 @@ function AddMovementModal({ closeModal, refreshMovements }) {
     try {
       await api.post("/movements", formData)
 
-      refreshMovements()
-
+      refreshCartridges()
       closeModal()
+      
     } catch (error) {
       console.error(error)
     }
@@ -51,15 +35,10 @@ function AddMovementModal({ closeModal, refreshMovements }) {
         <h2>Добавить операцию</h2>
 
         <form onSubmit={handleSubmit}>
-          <select name="cartridge_id" onChange={handleChange} required>
-            <option value="">Выберите картридж</option>
-
-            {cartridges.map((cartridge) => (
-              <option key={cartridge.id} value={cartridge.id}>
-                {cartridge.model}
-              </option>
-            ))}
-          </select>
+          <div className="selected-cartridge">
+            <span>Картридж:</span>
+            <strong>{cartridge.model}</strong>
+          </div>
 
           <select name="action_type" onChange={handleChange}>
             <option>Выдача</option>
