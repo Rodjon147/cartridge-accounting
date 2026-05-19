@@ -274,3 +274,21 @@ nav {
 .cartridge-table tr:hover {
   background: #f9fafb;
 }
+
+.movement-btn {
+  padding: 8px 12px;
+
+  border: none;
+
+  background: #2563eb;
+
+  color: white;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+}
+
+.movement-btn:hover {
+  opacity: 0.9;
+}

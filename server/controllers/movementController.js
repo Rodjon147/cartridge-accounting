@@ -13,13 +13,29 @@ exports.getAllMovements = (req, res) => {
 exports.createMovement = (req, res) => {
   const { cartridge_id, action_type, to_location, quantity, comment } = req.body
 
-  const sql = "INSERT INTO movements (cartridge_id,action_type,to_location,quantity,comment) VALUES (?, ?, ?, ?, ?)"
+  const movementSql = "INSERT INTO movements(cartridge_id,action_type,to_location,quantity,comment) VALUES (?, ?, ?, ?, ?)"
 
-  db.query(sql, [cartridge_id, action_type, to_location, quantity, comment], (err, result) => {
+  db.query(movementSql, [cartridge_id, action_type, to_location, quantity, comment], (err, result) => {
     if (err) res.status(500).json(err)
 
-    res.status(201).json({
-      message: "Movement created",
+    let qtyChange = 0
+
+    if (action_type === "Выдача" || action_type === "Списание") {
+      qtyChange = -quantity
+    }
+
+    if (action_type === "Поступление" || action_type === "Заправка") {
+      qtyChange = +quantity
+    }
+
+    const updateQtySql = "UPDATE cartridges SET qty = qty + ? WHERE id = ?"
+
+    db.query(updateQtySql, [qtyChange, cartridge_id], (err, updateResult) => {
+      if (err) res.status(500).json(err)
+
+      res.status(201).json({
+        message: "Movement created and stock updated",
+      })
     })
   })
 }
