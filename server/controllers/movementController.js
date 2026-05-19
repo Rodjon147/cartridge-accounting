@@ -50,13 +50,37 @@ exports.createMovement = (req, res) => {
 exports.deleteMovement = (req, res) => {
   const { id } = req.params
 
-  const sql = "DELETE FROM movements WHERE id = ?"
+  const getMovementSql = "SELECT * FROM movements WHERE id = ?"
 
-  db.query(sql, [id], (err, result) => {
-    if (err) res.status(500).json(err)
+  db.query(getMovementSql,[id], (err, movementResult) => {
+    if (err) return res.status(500).json(err)
+    
+    if (movementResult.length === 0) return res.status(404).json({message: "Movement not found"})
+    
+    const movement = movementResult[0]
+    let qtyRollback = 0
 
-    res.json({
-      message: "Movement deleted",
+    if (movement.action_type === "Выдача" || movement.action_type === "Списание"){
+      qtyRollback = +movement.quantity
+    }
+
+    if (movement.action_type === "Поступление" || movement.action_type === "Заправка") {
+      qtyRollback = -movement.quantity
+    }
+
+    const rollbackSql = "UPDATE cartridges SET qty = qty + ? WHERE id = ?"
+
+    db.query(rollbackSql, [qtyRollback, movement.cartridge_id], (err, rollbackResult) => {
+      if (err) return res.status(500).json(err)
+        const deleteSql = "DELETE FROM movements WHERE id = ?"
+        db.query(sql, [id], (err, result) => {
+          if (err) res.status(500).json(err)
+          res.json({message: "Movement deleted"})
+        })
     })
+    
   })
+  
+
+  
 }
