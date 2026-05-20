@@ -292,3 +292,148 @@ nav {
 .movement-btn:hover {
   opacity: 0.9;
 }
+
+
+
+.cartridge-model {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cartridge-note {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.type-badge {
+  padding: 6px 10px;
+
+  border-radius: 8px;
+
+  background: #f3f4f6;
+
+  font-size: 12px;
+}
+
+.qty-cell {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.qty-number {
+  min-width: 20px;
+
+  font-weight: 600;
+}
+
+.qty-bar {
+  width: 140px;
+
+  height: 6px;
+
+  background: #e5e7eb;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+}
+
+.qty-fill {
+  height: 100%;
+
+  border-radius: 999px;
+}
+
+.qty-good {
+  background: #22c55e;
+}
+
+.qty-warning {
+  background: #f59e0b;
+}
+
+.qty-danger {
+  background: #ef4444;
+}
+
+.status-pill {
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 500;
+}
+
+.status-good {
+  background: #dcfce7;
+
+  color: #16a34a;
+}
+
+.status-warning {
+  background: #fef3c7;
+
+  color: #d97706;
+}
+
+.status-danger {
+  background: #fee2e2;
+
+  color: #dc2626;
+}
+
+.actions-group {
+  display: flex;
+
+  gap: 10px;
+}
+
+.icon-btn {
+  width: 36px;
+
+  height: 36px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.icon-btn svg {
+  font-size: 16px;
+}
+
+.edit-icon {
+  background: #f3f4f6;
+}
+
+.movement-icon {
+  background: #dcfce7;
+
+  color: #16a34a;
+}
+
+.delete-icon {
+  background: #fee2e2;
+
+  color: #dc2626;
+}
+
+.icon-btn:hover {
+  transform: translateY(-1px);
+}
