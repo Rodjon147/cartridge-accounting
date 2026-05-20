@@ -3,6 +3,7 @@ import api from "../api/api"
 import AddCartridgeModal from "../components/ui/AddCartridgeModal"
 import EditCartridgeModal from "../components/ui/EditCartridgeModal"
 import AddMovementModal from "../components/ui/AddMovementModal"
+import { FiEdit2, FiTrash2, FiRefreshCw } from "react-icons/fi"
 
 function Cartridges() {
   const [cartridges, setCartridges] = useState([])
@@ -64,41 +65,91 @@ function Cartridges() {
         <table className="cartridge-table">
           <thead>
             <tr>
-              <th>ID</th>
               <th>Модель</th>
+
               <th>Тип</th>
+
               <th>Принтер</th>
-              <th>Количество</th>
-              <th>Минимум</th>
+
+              <th>Кол-во</th>
+
+              <th>Статус</th>
+
+              <th>Заправлен</th>
+
               <th>Действия</th>
             </tr>
           </thead>
 
           <tbody>
             {cartridges.map((cartridge) => (
-              <tr key={cartridge.id}>
-                <td>{cartridge.id}</td>
+              <tr key={cartridge.id} className={cartridge.qty <= cartridge.min_qty ? "low-stock-row" : ""}>
 
-                <td>{cartridge.model}</td>
+                <td>
+                  <div className="cartridge-model">
+                    <strong>{cartridge.model}</strong>
 
-                <td>{cartridge.type}</td>
+                    {cartridge.note && <span className="cartridge-note">{cartridge.note}</span>}
+                  </div>
+                </td>
+
+                <td>
+                  <span className="type-badge">{cartridge.type}</span>
+                </td>
 
                 <td>{cartridge.printer}</td>
 
-                <td>{cartridge.qty}</td>
+                <td>
+                  <div className="qty-cell">
+                    <span className="qty-number">{cartridge.qty}</span>
 
-                <td>{cartridge.min_qty}</td>
+                    <div className="qty-bar">
+                      <div
+                        className={`qty-fill ${
+                          cartridge.qty === 0
+                            ? "qty-danger"
+                            : cartridge.qty <= cartridge.min_qty
+                              ? "qty-warning"
+                              : "qty-good"
+                        }`}
+                        style={{
+                          width: `${Math.min(cartridge.qty * 20, 100)}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                </td>
 
-                <td className="actions-cell">
-                  <button className="edit-btn" onClick={() => openEditModal(cartridge)}>
-                    Изменить
-                  </button>
-                  <button className="movement-btn" onClick={() => setMovementCartridge(cartridge)}>
-                    Движение
-                  </button>
-                  <button className="delete-btn" onClick={() => deleteCartridge(cartridge.id)}>
-                    Удалить
-                  </button>
+                <td>
+                  <span
+                    className={`status-pill ${
+                      cartridge.qty === 0
+                        ? "status-danger"
+                        : cartridge.qty <= cartridge.min_qty
+                          ? "status-warning"
+                          : "status-good"
+                    }`}
+                  >
+                    {cartridge.qty === 0 ? "Закончились" : cartridge.qty <= cartridge.min_qty ? "Мало" : "В норме"}
+                  </span>
+                </td>
+
+                <td>{cartridge.refill_date ? new Date(cartridge.refill_date).toLocaleDateString() : "-"}</td>
+
+                <td>
+                  <div className="actions-group">
+                    <button className="icon-btn edit-icon" onClick={() => openEditModal(cartridge)}>
+                      <FiEdit2 />
+                    </button>
+
+                    <button className="icon-btn movement-icon" onClick={() => setMovementCartridge(cartridge)}>
+                      <FiRefreshCw />
+                    </button>
+
+                    <button className="icon-btn delete-icon" onClick={() => deleteCartridge(cartridge.id)}>
+                      <FiTrash2 />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

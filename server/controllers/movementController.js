@@ -73,9 +73,9 @@ exports.deleteMovement = (req, res) => {
     db.query(rollbackSql, [qtyRollback, movement.cartridge_id], (err, rollbackResult) => {
       if (err) return res.status(500).json(err)
         const deleteSql = "DELETE FROM movements WHERE id = ?"
-        db.query(sql, [id], (err, result) => {
+        db.query(deleteSql, [id], (err, result) => {
           if (err) res.status(500).json(err)
-          res.json({message: "Movement deleted"})
+          res.json({ message: "Movement deleted" })
         })
     })
     
