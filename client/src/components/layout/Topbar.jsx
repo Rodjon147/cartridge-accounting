@@ -1,10 +1,18 @@
-
-function Topbar() {
+function Topbar({ title, onAdd }) {
   return (
-    <div className="topbar">
-      <h1>Система учета картриджей</h1>
-      <button className="add-btn">Добавить</button>
-    </div>
+    <header className="topbar">
+      <h1 className="topbar-title">{title}</h1>
+
+      <div className="topbar-actions">
+        <button className="export-btn">Экспорт</button>
+
+        {onAdd && (
+          <button className="add-btn" onClick={onAdd}>
+            Добавить
+          </button>
+        )}
+      </div>
+    </header>
   )
 }
 
