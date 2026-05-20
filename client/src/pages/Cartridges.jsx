@@ -4,6 +4,7 @@ import AddCartridgeModal from "../components/ui/AddCartridgeModal"
 import EditCartridgeModal from "../components/ui/EditCartridgeModal"
 import AddMovementModal from "../components/ui/AddMovementModal"
 import { FiEdit2, FiTrash2, FiRefreshCw } from "react-icons/fi"
+import Topbar from "../components/layout/Topbar"
 
 function Cartridges() {
   const [cartridges, setCartridges] = useState([])
@@ -53,127 +54,122 @@ function Cartridges() {
   }
 
   return (
-    <div>
-      <div className="page-header">
-        <h2 className="page-title">Картриджи</h2>
-        <button className="add-btn" onClick={() => setIsModalOpen(true)}>
-          Добавить
-        </button>
-      </div>
+    <>
+      <Topbar title="Картриджи" onAdd={() => setIsModalOpen(true)} />
+      <div className="content">
+        <div className="table-container">
+          <table className="cartridge-table">
+            <thead>
+              <tr>
+                <th>Модель</th>
 
-      <div className="table-container">
-        <table className="cartridge-table">
-          <thead>
-            <tr>
-              <th>Модель</th>
+                <th>Тип</th>
 
-              <th>Тип</th>
+                <th>Принтер</th>
 
-              <th>Принтер</th>
+                <th>Кол-во</th>
 
-              <th>Кол-во</th>
+                <th>Статус</th>
 
-              <th>Статус</th>
+                <th>Заправлен</th>
 
-              <th>Заправлен</th>
-
-              <th>Действия</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {cartridges.map((cartridge) => (
-              <tr key={cartridge.id} className={cartridge.qty <= cartridge.min_qty ? "low-stock-row" : ""}>
-
-                <td>
-                  <div className="cartridge-model">
-                    <strong>{cartridge.model}</strong>
-
-                    {cartridge.note && <span className="cartridge-note">{cartridge.note}</span>}
-                  </div>
-                </td>
-
-                <td>
-                  <span className="type-badge">{cartridge.type}</span>
-                </td>
-
-                <td>{cartridge.printer}</td>
-
-                <td>
-                  <div className="qty-cell">
-                    <span className="qty-number">{cartridge.qty}</span>
-
-                    <div className="qty-bar">
-                      <div
-                        className={`qty-fill ${
-                          cartridge.qty === 0
-                            ? "qty-danger"
-                            : cartridge.qty <= cartridge.min_qty
-                              ? "qty-warning"
-                              : "qty-good"
-                        }`}
-                        style={{
-                          width: `${Math.min(cartridge.qty * 20, 100)}%`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                </td>
-
-                <td>
-                  <span
-                    className={`status-pill ${
-                      cartridge.qty === 0
-                        ? "status-danger"
-                        : cartridge.qty <= cartridge.min_qty
-                          ? "status-warning"
-                          : "status-good"
-                    }`}
-                  >
-                    {cartridge.qty === 0 ? "Закончились" : cartridge.qty <= cartridge.min_qty ? "Мало" : "В норме"}
-                  </span>
-                </td>
-
-                <td>{cartridge.refill_date ? new Date(cartridge.refill_date).toLocaleDateString() : "-"}</td>
-
-                <td>
-                  <div className="actions-group">
-                    <button className="icon-btn edit-icon" onClick={() => openEditModal(cartridge)}>
-                      <FiEdit2 />
-                    </button>
-
-                    <button className="icon-btn movement-icon" onClick={() => setMovementCartridge(cartridge)}>
-                      <FiRefreshCw />
-                    </button>
-
-                    <button className="icon-btn delete-icon" onClick={() => deleteCartridge(cartridge.id)}>
-                      <FiTrash2 />
-                    </button>
-                  </div>
-                </td>
+                <th>Действия</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {cartridges.map((cartridge) => (
+                <tr key={cartridge.id} className={cartridge.qty <= cartridge.min_qty ? "low-stock-row" : ""}>
+                  <td>
+                    <div className="cartridge-model">
+                      <strong>{cartridge.model}</strong>
+
+                      {cartridge.note && <span className="cartridge-note">{cartridge.note}</span>}
+                    </div>
+                  </td>
+
+                  <td>
+                    <span className="type-badge">{cartridge.type}</span>
+                  </td>
+
+                  <td>{cartridge.printer}</td>
+
+                  <td>
+                    <div className="qty-cell">
+                      <span className="qty-number">{cartridge.qty}</span>
+
+                      <div className="qty-bar">
+                        <div
+                          className={`qty-fill ${
+                            cartridge.qty === 0
+                              ? "qty-danger"
+                              : cartridge.qty <= cartridge.min_qty
+                                ? "qty-warning"
+                                : "qty-good"
+                          }`}
+                          style={{
+                            width: `${Math.min(cartridge.qty * 20, 100)}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span
+                      className={`status-pill ${
+                        cartridge.qty === 0
+                          ? "status-danger"
+                          : cartridge.qty <= cartridge.min_qty
+                            ? "status-warning"
+                            : "status-good"
+                      }`}
+                    >
+                      {cartridge.qty === 0 ? "Закончились" : cartridge.qty <= cartridge.min_qty ? "Мало" : "В норме"}
+                    </span>
+                  </td>
+
+                  <td>{cartridge.refill_date ? new Date(cartridge.refill_date).toLocaleDateString() : "-"}</td>
+
+                  <td>
+                    <div className="actions-group">
+                      <button className="icon-btn edit-icon" onClick={() => openEditModal(cartridge)}>
+                        <FiEdit2 />
+                      </button>
+
+                      <button className="icon-btn movement-icon" onClick={() => setMovementCartridge(cartridge)}>
+                        <FiRefreshCw />
+                      </button>
+
+                      <button className="icon-btn delete-icon" onClick={() => deleteCartridge(cartridge.id)}>
+                        <FiTrash2 />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {isModalOpen && (
+          <AddCartridgeModal closeModal={() => setIsModalOpen(false)} refreshCartridges={fetchCartridges} />
+        )}
+        {editingCartridge && (
+          <EditCartridgeModal
+            cartridge={editingCartridge}
+            closeModal={() => setEditingCartridge(null)}
+            refreshCartridges={fetchCartridges}
+          />
+        )}
+        {movementCartridge && (
+          <AddMovementModal
+            cartridge={movementCartridge}
+            closeModal={() => setMovementCartridge(null)}
+            refreshCartridges={fetchCartridges}
+          />
+        )}
       </div>
-      {isModalOpen && (
-        <AddCartridgeModal closeModal={() => setIsModalOpen(false)} refreshCartridges={fetchCartridges} />
-      )}
-      {editingCartridge && (
-        <EditCartridgeModal
-          cartridge={editingCartridge}
-          closeModal={() => setEditingCartridge(null)}
-          refreshCartridges={fetchCartridges}
-        />
-      )}
-      {movementCartridge && (
-        <AddMovementModal
-          cartridge={movementCartridge}
-          closeModal={() => setMovementCartridge(null)}
-          refreshCartridges={fetchCartridges}
-        />
-      )}
-    </div>
+    </>
   )
 }
 

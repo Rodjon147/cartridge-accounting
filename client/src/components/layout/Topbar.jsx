@@ -4,8 +4,6 @@ function Topbar({ title, onAdd }) {
       <h1 className="topbar-title">{title}</h1>
 
       <div className="topbar-actions">
-        <button className="export-btn">Экспорт</button>
-
         {onAdd && (
           <button className="add-btn" onClick={onAdd}>
             Добавить

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../api/api"
+import Topbar from "../components/layout/Topbar"
 
 function Movement() {
   const [movements, setMovements] = useState([])
@@ -43,58 +44,56 @@ function Movement() {
   }
 
   return (
-    <div>
-      <div className="page-header">
-        <h2 className="page-title">Движение картриджей</h2>
+    <>
+      <Topbar title="Движение" />
+      <div className="content">
+        <div className="table-container">
+          <table className="cartridge-table">
+            <thead>
+              <tr>
+                <th>Дата</th>
 
-      </div>
+                <th>Операция</th>
 
-      <div className="table-container">
-        <table className="cartridge-table">
-          <thead>
-            <tr>
-              <th>Дата</th>
+                <th>Картридж</th>
 
-              <th>Операция</th>
+                <th>Кол-во</th>
 
-              <th>Картридж</th>
+                <th>Принтер / Отдел</th>
 
-              <th>Кол-во</th>
+                <th>Примечание</th>
 
-              <th>Принтер / Отдел</th>
-
-              <th>Примечание</th>
-
-              <th>Отмена</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {movements.map((movement) => (
-              <tr key={movement.id}>
-                <td>{new Date(movement.movement_date).toLocaleDateString()}</td>
-
-                <td>{movement.action_type}</td>
-
-                <td>{movement.cartridge_model}</td>
-
-                <td>{movement.quantity}</td>
-
-                <td>{movement.to_location || "-"}</td>
-
-                <td>{movement.comment || "-"}</td>
-
-                <td className="actions-cell">
-                  <button className="delete-btn" onClick={() => deleteMovement(movement.id)}>
-                    Отменить
-                  </button>
-                </td>
+                <th>Отмена</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {movements.map((movement) => (
+                <tr key={movement.id}>
+                  <td>{new Date(movement.movement_date).toLocaleDateString()}</td>
+
+                  <td>{movement.action_type}</td>
+
+                  <td>{movement.cartridge_model}</td>
+
+                  <td>{movement.quantity}</td>
+
+                  <td>{movement.to_location || "-"}</td>
+
+                  <td>{movement.comment || "-"}</td>
+
+                  <td className="actions-cell">
+                    <button className="delete-btn" onClick={() => deleteMovement(movement.id)}>
+                      Отменить
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

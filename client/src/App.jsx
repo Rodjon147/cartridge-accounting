@@ -1,14 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-import Sidebar from "./components/layout/Sidebar";
-import Topbar from "./components/layout/Topbar";
+import Sidebar from "./components/layout/Sidebar"
 
-import Dashboard from "./pages/Dashboard";
-import Cartridges from "./pages/Cartridges";
-import Printers from "./pages/Printers";
-import Movement from "./pages/Movement";
+import Dashboard from "./pages/Dashboard"
+import Cartridges from "./pages/Cartridges"
+import Printers from "./pages/Printers"
+import Movement from "./pages/Movement"
 
-import "./styles/global.css";
+import "./styles/global.css"
 
 function App() {
   return (
@@ -17,9 +16,7 @@ function App() {
         <Sidebar />
 
         <div className="main">
-          <Topbar />
-
-          <div className="content">
+          <div>
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/cartridges" element={<Cartridges />} />
@@ -30,7 +27,7 @@ function App() {
         </div>
       </div>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
