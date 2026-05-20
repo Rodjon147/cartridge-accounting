@@ -3,7 +3,8 @@ import api from "../api/api"
 import AddCartridgeModal from "../components/ui/AddCartridgeModal"
 import EditCartridgeModal from "../components/ui/EditCartridgeModal"
 import AddMovementModal from "../components/ui/AddMovementModal"
-import { FiEdit2, FiTrash2, FiRefreshCw } from "react-icons/fi"
+import { FiEdit2, FiTrash2 } from "react-icons/fi"
+import { FaArrowRightArrowLeft } from "react-icons/fa6"
 import Topbar from "../components/layout/Topbar"
 import styles from "./Cartridges.module.css"
 
@@ -134,15 +135,24 @@ function Cartridges() {
 
                   <td>
                     <div className={styles.actionsGroup}>
-                      <button className={`${styles.iconBtn} ${styles.editIcon}`} onClick={() => openEditModal(cartridge)}>
+                      <button
+                        className={`${styles.iconBtn} ${styles.editIcon}`}
+                        onClick={() => openEditModal(cartridge)}
+                      >
                         <FiEdit2 />
                       </button>
 
-                      <button className={`${styles.iconBtn} ${styles.movementIcon}`} onClick={() => setMovementCartridge(cartridge)}>
-                        <FiRefreshCw />
+                      <button
+                        className={`${styles.iconBtn} ${styles.movementIcon}`}
+                        onClick={() => setMovementCartridge(cartridge)}
+                      >
+                        <FaArrowRightArrowLeft />
                       </button>
 
-                      <button className={`${styles.iconBtn} ${styles.deleteIcon}`} onClick={() => deleteCartridge(cartridge.id)}>
+                      <button
+                        className={`${styles.iconBtn} ${styles.deleteIcon}`}
+                        onClick={() => deleteCartridge(cartridge.id)}
+                      >
                         <FiTrash2 />
                       </button>
                     </div>

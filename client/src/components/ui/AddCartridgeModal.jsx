@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import api from "../../api/api"
 import styles from "./AddCartridgeModal.module.css"
+import { IoClose } from "react-icons/io5"
+import { FaSave } from "react-icons/fa"
 
 function AddCartridgeModal({ closeModal, refreshCartridges }) {
     const [formData, setFormData] = useState({
@@ -31,33 +33,62 @@ function AddCartridgeModal({ closeModal, refreshCartridges }) {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <h2>Добавить картридж</h2>
+        <div className={styles.modalHeader}>
+          <h2>Добавить картридж</h2>
+          <button className={styles.modalClose} onClick={closeModal}>
+            <IoClose />
+          </button>
+        </div>
 
         <form onSubmit={handleSubmit}>
-          <input type="text" name="model" placeholder="Модель" onChange={handleChange} required />
+          <div className={styles.formGroup}>
+            <label>Модель картриджа *</label>
+            <input type="text" name="model" placeholder="Модель" onChange={handleChange} required />
+          </div>
 
-          <input type="text" name="type" placeholder="Тип" onChange={handleChange} />
+          <div className={styles.formGroup}>
+            <label>Тип</label>
+            <select onChange={handleChange}>
+              <option value="Лазерный">Лазерный</option>
+              <option value="Струйный">Струйный</option>
+              <option value="Матричный">Матричный</option>
+            </select>
+          </div>
 
-          <input type="text" name="printer" placeholder="Принтер" onChange={handleChange} />
+          <div className={styles.formGroup}>
+            <label>Принтер</label>
+            <input type="text" name="printer" placeholder="Принтер" onChange={handleChange} />
+          </div>
 
-          <input type="number" name="qty" placeholder="Количество" onChange={handleChange} />
+          <div className={styles.formGroup}>
+            <label>Количество *</label>
+            <input type="number" name="qty" placeholder="Количество" min="0" onChange={handleChange} />
+          </div>
 
-          <input type="number" name="min_qty" placeholder="Минимальное количество" onChange={handleChange} />
+          <div className={styles.formGroup}>
+            <label>Мин. остаток (предупреждение)</label>
+            <input type="number" name="min_qty" placeholder="2" min="0" onChange={handleChange} />
+          </div>
 
-          <input type="date" name="refill_date" onChange={handleChange} />
+          <div className={styles.formGroup}>
+            <label>Дата последней заправки</label>
+            <input type="date" name="refill_date" onChange={handleChange} />
+          </div>
 
-          <textarea name="note" placeholder="Заметка" onChange={handleChange} />
-
-          <div className={styles.modalActions}>
-            <button type="submit" className={styles.saveBtn}>
-              Сохранить
-            </button>
-
-            <button type="button" className={styles.cancelBtn} onClick={closeModal}>
-              Отмена
-            </button>
+          <div className={`${styles.formGroup} ${styles.full}`}>
+            <label>Примечание</label>
+            <textarea name="note" placeholder="Дополнительная информация..." onChange={handleChange} />
           </div>
         </form>
+        <div className={styles.modalActions}>
+          <button type="button" className={styles.cancelBtn} onClick={closeModal}>
+            Отмена
+          </button>
+          <button type="submit" className={styles.saveBtn}>
+            <FaSave />
+            Сохранить
+          </button>
+        </div>
       </div>
     </div>
   )

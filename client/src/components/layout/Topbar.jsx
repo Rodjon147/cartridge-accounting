@@ -1,4 +1,5 @@
 import styles from "./Topbar.module.css"
+import { FaPlus } from "react-icons/fa"
 
 function Topbar({ title, onAdd }) {
   return (
@@ -8,6 +9,7 @@ function Topbar({ title, onAdd }) {
       <div className={styles.topbarActions}>
         {onAdd && (
           <button className={styles.addBtn} onClick={onAdd}>
+            <FaPlus />
             Добавить
           </button>
         )}

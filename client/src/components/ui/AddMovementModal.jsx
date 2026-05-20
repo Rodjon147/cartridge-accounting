@@ -43,7 +43,7 @@ function AddMovementModal({ cartridge, closeModal, refreshCartridges }) {
           <select name="action_type" onChange={handleChange}>
             <option>Выдача</option>
 
-            <option>Возврат</option>
+            <option>Поступление</option>
 
             <option>Заправка</option>
 

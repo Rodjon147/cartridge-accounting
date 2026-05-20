@@ -9,7 +9,7 @@
 }
 
 .topbarTitle {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 700;
     color: #111827;
 }
@@ -21,10 +21,13 @@
 }
 
 .addBtn {
-    padding: 10px 16px;
+    padding: 8px 16px;
     border: none;
     background: #2563eb;
     color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
