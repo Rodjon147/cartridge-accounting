@@ -20,9 +20,7 @@ function Dashboard() {
 
   const [movements, setMovements] = useState([])
 
-  useEffect(() => {
-    fetchDashboardData()
-  }, [])
+  
 
   const fetchDashboardData = async () => {
     try {
@@ -38,6 +36,13 @@ function Dashboard() {
     }
   }
 
+  useEffect(() => {
+    const loadDashboard = async () => {
+      await fetchDashboardData()
+    }
+    loadDashboard()
+  }, [])
+  
   const lowCartridges = cartridges.filter((item) => item.qty > 0 && item.qty <= item.min_qty)
 
   const emptyCartridges = cartridges.filter((item) => item.qty === 0)
@@ -67,9 +72,7 @@ function Dashboard() {
     <>
       <Topbar title="Дашборд" />
 
-      <div className="page-content">
-        {/* STATS */}
-
+      <div className="content">
         <div className="dashboard-stats">
           <div className="stat-card">
             <div className="stat-icon blue">
@@ -79,6 +82,7 @@ function Dashboard() {
             <h2>{cartridges.length}</h2>
 
             <p>Всего картриджей</p>
+            <span className="stat-subtext">{cartridges.reduce((sum, item) => sum + item.qty, 0)} шт. в наличии</span>
           </div>
 
           <div className="stat-card">
@@ -112,11 +116,7 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* GRID */}
-
         <div className="dashboard-grid">
-          {/* ALERTS */}
-
           <div className="dashboard-card">
             <div className="dashboard-card-header">
               <FiAlertTriangle />
@@ -127,14 +127,20 @@ function Dashboard() {
             <div className="dashboard-list">
               {[...lowCartridges, ...emptyCartridges].map((item) => (
                 <div key={item.id} className="dashboard-item">
-                  <div>
-                    <h4>{item.model}</h4>
+                  <div className="movement-info">
+                    <div className={item.qty === 0 ? "movement-icon red" : "movement-icon orange"}>
+                      {item.qty === 0 ? <FiXCircle /> : <FiAlertTriangle />}
+                    </div>
 
-                    <span>{item.printer}</span>
+                    <div>
+                      <h4>{item.model}</h4>
+
+                      <span>{item.printer}</span>
+                    </div>
                   </div>
 
                   <div className="dashboard-item-right">
-                    <strong>{item.qty} шт.</strong>
+                    <strong className={item.qty === 0 ? "danger-text" : "warning-text"}>{item.qty} шт.</strong>
 
                     <span className={item.qty === 0 ? "status-badge red" : "status-badge orange"}>
                       {item.qty === 0 ? "Закончились" : "Мало"}
@@ -145,12 +151,9 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* MOVEMENTS */}
-
           <div className="dashboard-card">
             <div className="dashboard-card-header">
               <FiRefreshCw />
-
               <h3>Последние операции</h3>
             </div>
 
