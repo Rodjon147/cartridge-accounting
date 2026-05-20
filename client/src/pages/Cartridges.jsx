@@ -5,6 +5,7 @@ import EditCartridgeModal from "../components/ui/EditCartridgeModal"
 import AddMovementModal from "../components/ui/AddMovementModal"
 import { FiEdit2, FiTrash2, FiRefreshCw } from "react-icons/fi"
 import Topbar from "../components/layout/Topbar"
+import styles from "./Cartridges.module.css"
 
 function Cartridges() {
   const [cartridges, setCartridges] = useState([])
@@ -56,9 +57,9 @@ function Cartridges() {
   return (
     <>
       <Topbar title="Картриджи" onAdd={() => setIsModalOpen(true)} />
-      <div className="content">
-        <div className="table-container">
-          <table className="cartridge-table">
+      <div className={styles.content}>
+        <div className={styles.tableContainer}>
+          <table className={styles.cartridgeTable}>
             <thead>
               <tr>
                 <th>Модель</th>
@@ -81,31 +82,31 @@ function Cartridges() {
               {cartridges.map((cartridge) => (
                 <tr key={cartridge.id} className={cartridge.qty <= cartridge.min_qty ? "low-stock-row" : ""}>
                   <td>
-                    <div className="cartridge-model">
+                    <div className={styles.cartridgeModel}>
                       <strong>{cartridge.model}</strong>
 
-                      {cartridge.note && <span className="cartridge-note">{cartridge.note}</span>}
+                      {cartridge.note && <span className={styles.cartridgeNote}>{cartridge.note}</span>}
                     </div>
                   </td>
 
                   <td>
-                    <span className="type-badge">{cartridge.type}</span>
+                    <span className={styles.typeBadge}>{cartridge.type}</span>
                   </td>
 
                   <td>{cartridge.printer}</td>
 
                   <td>
-                    <div className="qty-cell">
-                      <span className="qty-number">{cartridge.qty}</span>
+                    <div className={styles.qtyCell}>
+                      <span className={styles.qtyNumber}>{cartridge.qty}</span>
 
-                      <div className="qty-bar">
+                      <div className={styles.qtyBar}>
                         <div
-                          className={`qty-fill ${
+                          className={`${styles.qtyFill} ${
                             cartridge.qty === 0
-                              ? "qty-danger"
+                              ? styles.qtyDanger
                               : cartridge.qty <= cartridge.min_qty
-                                ? "qty-warning"
-                                : "qty-good"
+                                ? styles.qtyWarning
+                                : styles.qtyGood
                           }`}
                           style={{
                             width: `${Math.min(cartridge.qty * 20, 100)}%`,
@@ -117,12 +118,12 @@ function Cartridges() {
 
                   <td>
                     <span
-                      className={`status-pill ${
+                      className={`${styles.statusPill} ${
                         cartridge.qty === 0
-                          ? "status-danger"
+                          ? styles.statusDanger
                           : cartridge.qty <= cartridge.min_qty
-                            ? "status-warning"
-                            : "status-good"
+                            ? styles.statusWarning
+                            : styles.statusGood
                       }`}
                     >
                       {cartridge.qty === 0 ? "Закончились" : cartridge.qty <= cartridge.min_qty ? "Мало" : "В норме"}
@@ -132,16 +133,16 @@ function Cartridges() {
                   <td>{cartridge.refill_date ? new Date(cartridge.refill_date).toLocaleDateString() : "-"}</td>
 
                   <td>
-                    <div className="actions-group">
-                      <button className="icon-btn edit-icon" onClick={() => openEditModal(cartridge)}>
+                    <div className={styles.actionsGroup}>
+                      <button className={`${styles.iconBtn} ${styles.editIcon}`} onClick={() => openEditModal(cartridge)}>
                         <FiEdit2 />
                       </button>
 
-                      <button className="icon-btn movement-icon" onClick={() => setMovementCartridge(cartridge)}>
+                      <button className={`${styles.iconBtn} ${styles.movementIcon}`} onClick={() => setMovementCartridge(cartridge)}>
                         <FiRefreshCw />
                       </button>
 
-                      <button className="icon-btn delete-icon" onClick={() => deleteCartridge(cartridge.id)}>
+                      <button className={`${styles.iconBtn} ${styles.deleteIcon}`} onClick={() => deleteCartridge(cartridge.id)}>
                         <FiTrash2 />
                       </button>
                     </div>

@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react"
 import api from "../api/api"
 import Topbar from "../components/layout/Topbar"
+import AddMovementModal from "../components/ui/AddMovementModal"
+import { FiCornerRightUp } from "react-icons/fi"
+import styles from "./Movement.module.css"
 
 function Movement() {
   const [movements, setMovements] = useState([])
   const [loading, setLoading] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const fetchMovements = async () => {
     try {
@@ -45,10 +49,10 @@ function Movement() {
 
   return (
     <>
-      <Topbar title="Движение" />
-      <div className="content">
-        <div className="table-container">
-          <table className="cartridge-table">
+      <Topbar title="Движение" onAdd={() => setIsModalOpen(true)} />
+      <div className={styles.content}>
+        <div className={styles.tableContainer}>
+          <table className={styles.cartridgeTable}>
             <thead>
               <tr>
                 <th>Дата</th>
@@ -82,9 +86,12 @@ function Movement() {
 
                   <td>{movement.comment || "-"}</td>
 
-                  <td className="actions-cell">
-                    <button className="delete-btn" onClick={() => deleteMovement(movement.id)}>
-                      Отменить
+                  <td className={styles.actionsCell}>
+                    <button
+                      className={`${styles.iconBtn} ${styles.deleteIcon}`}
+                      onClick={() => deleteMovement(movement.id)}
+                    >
+                      <FiCornerRightUp />
                     </button>
                   </td>
                 </tr>
@@ -92,6 +99,11 @@ function Movement() {
             </tbody>
           </table>
         </div>
+        {
+          isModalOpen && (
+            <AddMovementModal cartridge={movements} closeModal={() => setIsModalOpen(false)} refreshCartridges={fetchMovements()} />
+          )
+        }
       </div>
     </>
   )

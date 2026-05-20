@@ -7,7 +7,8 @@ import Cartridges from "./pages/Cartridges"
 import Printers from "./pages/Printers"
 import Movement from "./pages/Movement"
 
-import "./styles/global.css"
+// import "./styles/global.css"
+import "./style.css"
 
 function App() {
   return (

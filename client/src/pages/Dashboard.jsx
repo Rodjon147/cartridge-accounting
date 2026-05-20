@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 import axios from "axios"
-
+import styles from "./Dashboard.module.css"
 import Topbar from "../components/layout/Topbar"
 
 import {
@@ -72,21 +72,23 @@ function Dashboard() {
     <>
       <Topbar title="Дашборд" />
 
-      <div className="content">
-        <div className="dashboard-stats">
-          <div className="stat-card">
-            <div className="stat-icon blue">
+      <div className={styles.content}>
+        <div className={styles.dashboardStats}>
+          <div className={styles.statCard}>
+            <div className={`${styles.statIcon} ${styles.blue}`}>
               <FiPackage />
             </div>
 
             <h2>{cartridges.length}</h2>
 
             <p>Всего картриджей</p>
-            <span className="stat-subtext">{cartridges.reduce((sum, item) => sum + item.qty, 0)} шт. в наличии</span>
+            <span className={styles.statSubtext}>
+              {cartridges.reduce((sum, item) => sum + item.qty, 0)} шт. в наличии
+            </span>
           </div>
 
-          <div className="stat-card">
-            <div className="stat-icon green">
+          <div className={styles.statCard}>
+            <div className={`${styles.statIcon} ${styles.green}`}>
               <FiCheckCircle />
             </div>
 
@@ -95,8 +97,8 @@ function Dashboard() {
             <p>В норме</p>
           </div>
 
-          <div className="stat-card">
-            <div className="stat-icon orange">
+          <div className={styles.statCard}>
+            <div className={`${styles.statIcon} ${styles.orange}`}>
               <FiAlertTriangle />
             </div>
 
@@ -105,8 +107,8 @@ function Dashboard() {
             <p>Мало осталось</p>
           </div>
 
-          <div className="stat-card">
-            <div className="stat-icon red">
+          <div className={styles.statCard}>
+            <div className={`${styles.statIcon} ${styles.red}`}>
               <FiXCircle />
             </div>
 
@@ -116,19 +118,24 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="dashboard-grid">
-          <div className="dashboard-card">
-            <div className="dashboard-card-header">
+        <div className={styles.dashboardGrid}>
+          <div className={styles.dashboardCard}>
+            <div className={styles.dashboardCardHeader}>
               <FiAlertTriangle />
-
               <h3>Требуют внимания</h3>
             </div>
 
-            <div className="dashboard-list">
+            <div className={styles.dashboardList}>
               {[...lowCartridges, ...emptyCartridges].map((item) => (
-                <div key={item.id} className="dashboard-item">
-                  <div className="movement-info">
-                    <div className={item.qty === 0 ? "movement-icon red" : "movement-icon orange"}>
+                <div key={item.id} className={styles.dashboardItem}>
+                  <div className={styles.movementInfo}>
+                    <div
+                      className={
+                        item.qty === 0
+                          ? `${styles.movementIcon} ${styles.red}`
+                          : `${styles.movementIcon} ${styles.orange}`
+                      }
+                    >
                       {item.qty === 0 ? <FiXCircle /> : <FiAlertTriangle />}
                     </div>
 
@@ -139,29 +146,27 @@ function Dashboard() {
                     </div>
                   </div>
 
-                  <div className="dashboard-item-right">
-                    <strong className={item.qty === 0 ? "danger-text" : "warning-text"}>{item.qty} шт.</strong>
+                  <div className={styles.dashboardItemRight}>
+                    <strong className={item.qty === 0 ? styles.dangerText : styles.warningText}>{item.qty} шт.</strong>
 
-                    <span className={item.qty === 0 ? "status-badge red" : "status-badge orange"}>
-                      {item.qty === 0 ? "Закончились" : "Мало"}
-                    </span>
+                    <span>{item.qty === 0 ? "Закончились" : "Мало"}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="dashboard-card">
-            <div className="dashboard-card-header">
+          <div className={styles.dashboardCard}>
+            <div className={styles.dashboardCardHeader}>
               <FiRefreshCw />
               <h3>Последние операции</h3>
             </div>
 
-            <div className="dashboard-list">
+            <div className={styles.dashboardList}>
               {movements.slice(0, 5).map((item) => (
-                <div key={item.id} className="dashboard-item">
-                  <div className="movement-info">
-                    <div className="movement-icon">{getMovementIcon(item.action_type)}</div>
+                <div key={item.id} className={styles.dashboardItem}>
+                  <div className={styles.movementInfo}>
+                    <div className={styles.movementIcon}>{getMovementIcon(item.action_type)}</div>
 
                     <div>
                       <h4>

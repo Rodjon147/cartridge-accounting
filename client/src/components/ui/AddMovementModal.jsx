@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import styles from "./AddMovementModal.module.css"
 import api from "../../api/api"
 
 function AddMovementModal({ cartridge, closeModal, refreshCartridges }) {
@@ -30,8 +30,8 @@ function AddMovementModal({ cartridge, closeModal, refreshCartridges }) {
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <div className={styles.modalOverlay}>
+      <div className={styles.modal}>
         <h2>Добавить операцию</h2>
 
         <form onSubmit={handleSubmit}>
@@ -56,12 +56,12 @@ function AddMovementModal({ cartridge, closeModal, refreshCartridges }) {
 
           <textarea name="comment" placeholder="Примечание" onChange={handleChange} />
 
-          <div className="modal-actions">
-            <button type="submit" className="save-btn">
+          <div className={styles.modalActions}>
+            <button type="submit" className={styles.saveBtn}>
               Сохранить
             </button>
 
-            <button type="button" className="cancel-btn" onClick={closeModal}>
+            <button type="button" className={styles.cancelBtn} onClick={closeModal}>
               Отмена
             </button>
           </div>

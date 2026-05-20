@@ -1,0 +1,30 @@
+.topbar {
+    height: 70px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+.topbarTitle {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.topbarActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.addBtn {
+    padding: 10px 16px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import api from "../../api/api"
+import styles from "./EditCartridgeModal.module.css"
 
 function EditCartridgeModal({cartridge, closeModal, refreshCartridges}) {
 
@@ -38,9 +39,9 @@ function EditCartridgeModal({cartridge, closeModal, refreshCartridges}) {
 
 
     return (
-        <div className="modal-overlay">
+        <div className={styles.modalOverlay}>
 
-            <div className="modal">
+            <div className={styles.modal}>
 
                 <h2>Редактировать картридж</h2>
 
@@ -52,10 +53,10 @@ function EditCartridgeModal({cartridge, closeModal, refreshCartridges}) {
                     <input type="number" name="qty" value={formData.qty} onChange={handleChange}/>
                     <input type="number" name="min_qty" value={formData.min_qty} onChange={handleChange}/>
                     <textarea name="note" value={formData.note} onChange={handleChange}/>
-                    <div className="modal-actions">
+                    <div className={styles.modalActions}>
 
-                        <button type="submit" className="save-btn">Сохранить</button>
-                        <button type="button" className="cancel-btn" onClick={closeModal}>Отмена</button>
+                        <button type="submit" className={styles.saveBtn}>Сохранить</button>
+                        <button type="button" className={styles.cancelBtn} onClick={closeModal}>Отмена</button>
                     </div>
 
                 </form>

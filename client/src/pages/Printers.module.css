@@ -1,0 +1,59 @@
+.content {
+    padding: 30px;
+}
+
+.tableContainer {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.cartridgeTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cartridgeTable th,
+.cartridgeTable td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.cartridgeTable th {
+    background: #f3f4f6;
+}
+
+.actionsCell {
+    display: flex;
+    gap: 10px;
+}
+
+.iconBtn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.iconBtn:hover {
+    transform: translateY(-1px);
+}
+
+.iconBtn svg {
+    font-size: 16px;
+}
+
+.editIcon {
+    background: #f3f4f6;
+}
+
+.deleteIcon {
+    background: #fee2e2;
+    color: #dc2626;
+}

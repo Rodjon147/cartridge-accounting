@@ -1,11 +1,13 @@
+import styles from "./Topbar.module.css"
+
 function Topbar({ title, onAdd }) {
   return (
-    <header className="topbar">
-      <h1 className="topbar-title">{title}</h1>
+    <header className={styles.topbar}>
+      <h1 className={styles.topbarTitle}>{title}</h1>
 
-      <div className="topbar-actions">
+      <div className={styles.topbarActions}>
         {onAdd && (
-          <button className="add-btn" onClick={onAdd}>
+          <button className={styles.addBtn} onClick={onAdd}>
             Добавить
           </button>
         )}

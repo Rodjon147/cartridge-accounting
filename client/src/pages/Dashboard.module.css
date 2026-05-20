@@ -1,0 +1,172 @@
+.content {
+    padding: 30px;
+}
+
+.dashboardStats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.statCard {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+}
+
+.statCard h2 {
+    font-size: 40px;
+    margin: 12px 0 4px;
+}
+
+.statCard p {
+    color: #6b7280;
+}
+
+.statIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.statSubtext {
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 14px;
+
+    color: #9ca3af;
+}
+
+.dashboardGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.dashboardCard {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+}
+
+.dashboardCardHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: 600;
+}
+
+.dashboardList {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboardItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.dashboardItem h4 {
+    margin-bottom: 4px;
+}
+
+.dashboardItem span {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.dashboardItemRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.movementInfo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.movementIcon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboardCard {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+}
+
+.dashboardCardHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: 600;
+}
+
+.dashboardList {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboardItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+
+.blue {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.green {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.orange {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.red {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.warningText {
+    color: #d97706;
+}
+
+.dangerText {
+    color: #dc2626;
+}

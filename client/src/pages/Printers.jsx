@@ -3,6 +3,8 @@ import api from "../api/api"
 import AddPrinterModal from "../components/ui/AddPrinterModal"
 import EditPrinterModal from "../components/ui/EditPrinterModal"
 import Topbar from "../components/layout/Topbar"
+import { FiEdit2, FiTrash2 } from "react-icons/fi"
+import styles from "./Printers.module.css"
 
 function Printers() {
   const [printers, setPrinters] = useState([])
@@ -54,13 +56,11 @@ function Printers() {
   return (
     <>
       <Topbar title="Принтеры" onAdd={() => setIsModalOpen(true)} />
-      <div className="content">
-        <div className="table-container">
-          <table className="cartridge-table">
+      <div className={styles.content}>
+        <div className={styles.tableContainer}>
+          <table className={styles.cartridgeTable}>
             <thead>
               <tr>
-                <th>ID</th>
-
                 <th>Название</th>
 
                 <th>Модель</th>
@@ -78,8 +78,6 @@ function Printers() {
             <tbody>
               {printers.map((printer) => (
                 <tr key={printer.id}>
-                  <td>{printer.id}</td>
-
                   <td>{printer.name}</td>
 
                   <td>{printer.model}</td>
@@ -90,13 +88,13 @@ function Printers() {
 
                   <td>{printer.status}</td>
 
-                  <td className="actions-cell">
-                    <button className="edit-btn" onClick={() => openEditModal(printer)}>
-                      Изменить
+                  <td className={styles.actionsCell}>
+                    <button className={`${styles.iconBtn} ${styles.editIcon}`} onClick={() => openEditModal(printer)}>
+                      <FiEdit2 />
                     </button>
 
-                    <button className="delete-btn" onClick={() => deletePrinter(printer.id)}>
-                      Удалить
+                    <button className={`${styles.iconBtn} ${styles.deleteIcon}`} onClick={() => deletePrinter(printer.id)}>
+                      <FiTrash2 />
                     </button>
                   </td>
                 </tr>

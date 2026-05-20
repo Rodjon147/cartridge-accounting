@@ -1,5 +1,6 @@
 import { useState } from "react"
 import api from "../../api/api"
+import styles from "./AddPrinterModal.module.css"
 
 function AddPrinterModal({ closeModal, refreshPrinters }) {
   const [formData, setFormData] = useState({
@@ -28,8 +29,8 @@ function AddPrinterModal({ closeModal, refreshPrinters }) {
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
+    <div className={styles.modalOverlay}>
+      <div className={styles.modal}>
         <h2>Добавить принтер</h2>
 
         <form onSubmit={handleSubmit}>
@@ -39,9 +40,9 @@ function AddPrinterModal({ closeModal, refreshPrinters }) {
           <input type="text" name="cartridge" placeholder="Картридж" onChange={handleChange} />
           <input type="text" name="status" placeholder="Статус" onChange={handleChange} />
 
-          <div className="modal-actions">
-            <button type="submit" className="save-btn">Сохранить</button>
-            <button type="button" className="cancel-btn" onClick={closeModal}>Отмена</button>
+          <div className={styles.modalActions}>
+            <button type="submit" className={styles.saveBtn}>Сохранить</button>
+            <button type="button" className={styles.cancelBtn} onClick={closeModal}>Отмена</button>
           </div>
         </form>
       </div>
