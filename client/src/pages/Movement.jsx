@@ -56,17 +56,11 @@ function Movement() {
             <thead>
               <tr>
                 <th>Дата</th>
-
                 <th>Операция</th>
-
                 <th>Картридж</th>
-
                 <th>Кол-во</th>
-
                 <th>Принтер / Отдел</th>
-
                 <th>Примечание</th>
-
                 <th>Отмена</th>
               </tr>
             </thead>
@@ -103,9 +97,8 @@ function Movement() {
         </div>
         {isModalOpen && (
           <AddMovementModal
-            cartridge={movements}
             closeModal={() => setIsModalOpen(false)}
-            refreshCartridges={fetchMovements()}
+            refreshCartridges={fetchMovements}
           />
         )}
       </div>
