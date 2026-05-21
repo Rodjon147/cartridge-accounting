@@ -1,6 +1,8 @@
 import { useState } from "react"
 import styles from "./AddMovementModal.module.css"
 import api from "../../api/api"
+import { IoClose } from "react-icons/io5"
+import { FaSave } from "react-icons/fa"
 
 function AddMovementModal({ cartridge, closeModal, refreshCartridges }) {
   const [formData, setFormData] = useState({
@@ -23,7 +25,6 @@ function AddMovementModal({ cartridge, closeModal, refreshCartridges }) {
 
       refreshCartridges()
       closeModal()
-      
     } catch (error) {
       console.error(error)
     }
@@ -32,37 +33,51 @@ function AddMovementModal({ cartridge, closeModal, refreshCartridges }) {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <h2>Добавить операцию</h2>
+        <div className={styles.modalHeader}>
+          <h2>Новая операция</h2>
+          <button className={styles.modalClose} onClick={closeModal}>
+            <IoClose />
+          </button>
+        </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="selected-cartridge">
-            <span>Картридж:</span>
-            <strong>{cartridge.model}</strong>
+          <div className={styles.formGrid}>
+            <div className={styles.formGroup}>
+              <label>Тип операции</label>
+              <select name="action_type" onChange={handleChange}>
+                <option>Выдача</option>
+                <option>Поступление</option>
+                <option>Заправка</option>
+                <option>Списание</option>
+              </select>
+            </div>
+            <div className={styles.formGroup}>
+              <label>Картридж *</label>
+              <select name="action_type" onChange={handleChange}>
+                <option>{cartridge.model}</option>
+              </select>
+            </div>
+            <div className={styles.formGroup}>
+              <label>Количество *</label>
+              <input type="number" name="quantity" placeholder="Количество" min="0" onChange={handleChange} />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Принтер / отдел</label>
+              <input type="text" name="to_location" placeholder="Бухгалтерия" onChange={handleChange} />
+            </div>
+            <div className={`${styles.formGroup} ${styles.full}`}>
+              <label>Примечание</label>
+              <textarea name="comment" placeholder="Дополнительная информация..." onChange={handleChange} />
+            </div>
           </div>
 
-          <select name="action_type" onChange={handleChange}>
-            <option>Выдача</option>
-
-            <option>Поступление</option>
-
-            <option>Заправка</option>
-
-            <option>Списание</option>
-          </select>
-
-          <input type="text" name="to_location" placeholder="Принтер / отдел" onChange={handleChange} />
-
-          <input type="number" name="quantity" placeholder="Количество" onChange={handleChange} />
-
-          <textarea name="comment" placeholder="Примечание" onChange={handleChange} />
-
           <div className={styles.modalActions}>
-            <button type="submit" className={styles.saveBtn}>
-              Сохранить
-            </button>
-
             <button type="button" className={styles.cancelBtn} onClick={closeModal}>
               Отмена
+            </button>
+            <button type="submit" className={styles.saveBtn}>
+              <FaSave />
+              Сохранить
             </button>
           </div>
         </form>

@@ -41,54 +41,56 @@ function AddCartridgeModal({ closeModal, refreshCartridges }) {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className={styles.formGroup}>
-            <label>Модель картриджа *</label>
-            <input type="text" name="model" placeholder="Модель" onChange={handleChange} required />
-          </div>
+          <div className={styles.formGrid}>
+            <div className={styles.formGroup}>
+              <label>Модель картриджа *</label>
+              <input type="text" name="model" placeholder="Модель" onChange={handleChange} required />
+            </div>
 
-          <div className={styles.formGroup}>
-            <label>Тип</label>
-            <select onChange={handleChange}>
-              <option value="Лазерный">Лазерный</option>
-              <option value="Струйный">Струйный</option>
-              <option value="Матричный">Матричный</option>
-            </select>
-          </div>
+            <div className={styles.formGroup}>
+              <label>Тип</label>
+              <select name="type" value={formData.type} onChange={handleChange}>
+                <option value="Лазерный">Лазерный</option>
+                <option value="Струйный">Струйный</option>
+                <option value="Матричный">Матричный</option>
+              </select>
+            </div>
 
-          <div className={styles.formGroup}>
-            <label>Принтер</label>
-            <input type="text" name="printer" placeholder="Принтер" onChange={handleChange} />
-          </div>
+            <div className={styles.formGroup}>
+              <label>Принтер</label>
+              <input type="text" name="printer" placeholder="Принтер" onChange={handleChange} />
+            </div>
 
-          <div className={styles.formGroup}>
-            <label>Количество *</label>
-            <input type="number" name="qty" placeholder="Количество" min="0" onChange={handleChange} />
-          </div>
+            <div className={styles.formGroup}>
+              <label>Количество *</label>
+              <input type="number" name="qty" placeholder="Количество" min="0" onChange={handleChange} />
+            </div>
 
-          <div className={styles.formGroup}>
-            <label>Мин. остаток (предупреждение)</label>
-            <input type="number" name="min_qty" placeholder="2" min="0" onChange={handleChange} />
-          </div>
+            <div className={styles.formGroup}>
+              <label>Мин. остаток (предупреждение)</label>
+              <input type="number" name="min_qty" placeholder="2" min="0" onChange={handleChange} />
+            </div>
 
-          <div className={styles.formGroup}>
-            <label>Дата последней заправки</label>
-            <input type="date" name="refill_date" onChange={handleChange} />
-          </div>
+            <div className={styles.formGroup}>
+              <label>Дата последней заправки</label>
+              <input type="date" name="refill_date" onChange={handleChange} />
+            </div>
 
-          <div className={`${styles.formGroup} ${styles.full}`}>
-            <label>Примечание</label>
-            <textarea name="note" placeholder="Дополнительная информация..." onChange={handleChange} />
+            <div className={`${styles.formGroup} ${styles.full}`}>
+              <label>Примечание</label>
+              <textarea name="note" placeholder="Дополнительная информация..." onChange={handleChange} />
+            </div>
+          </div>
+          <div className={styles.modalActions}>
+            <button type="button" className={styles.cancelBtn} onClick={closeModal}>
+              Отмена
+            </button>
+            <button type="submit" className={styles.saveBtn}>
+              <FaSave />
+              Сохранить
+            </button>
           </div>
         </form>
-        <div className={styles.modalActions}>
-          <button type="button" className={styles.cancelBtn} onClick={closeModal}>
-            Отмена
-          </button>
-          <button type="submit" className={styles.saveBtn}>
-            <FaSave />
-            Сохранить
-          </button>
-        </div>
       </div>
     </div>
   )

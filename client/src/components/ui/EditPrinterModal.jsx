@@ -1,6 +1,8 @@
 import { useState } from "react"
 import api from "../../api/api"
 import styles from "./EditPrinterModal.module.css"
+import { IoClose } from "react-icons/io5"
+import { FaSave } from "react-icons/fa"
 
 function EditPrinterModal({ printer, closeModal, refreshPrinters }) {
   const [formData, setFormData] = useState({
@@ -8,11 +10,11 @@ function EditPrinterModal({ printer, closeModal, refreshPrinters }) {
     model: printer.model,
     department: printer.department,
     cartridge: printer.cartridge,
-    status: printer.status
+    status: printer.status,
   })
 
   const handleChange = (e) => {
-    setFormData({...formData,[e.target.name]: e.target.value})
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e) => {
@@ -32,26 +34,65 @@ function EditPrinterModal({ printer, closeModal, refreshPrinters }) {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <h2>Редактировать принтер</h2>
-
+        <div className={styles.modalHeader}>
+          <h2>Редактировать принтер</h2>
+          <button className={styles.modalClose} onClick={closeModal}>
+            <IoClose />
+          </button>
+        </div>
         <form onSubmit={handleSubmit}>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} />
-
-          <input type="text" name="model" value={formData.model} onChange={handleChange} />
-
-          <input type="text" name="department" value={formData.department} onChange={handleChange} />
-
-          <input type="text" name="cartridge" value={formData.cartridge} onChange={handleChange} />
-
-          <input type="text" name="status" value={formData.status} onChange={handleChange} />
+          <div className={styles.formGrid}>
+            <div className={styles.formGroup}>
+              <label>Название / Инв. номер *</label>
+              <input type="text" name="name" placeholder="Принтер-01" value={formData.name} onChange={handleChange} />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Модель</label>
+              <input
+                type="text"
+                name="model"
+                placeholder="HP LaserJet P1102"
+                value={formData.model}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Отдел</label>
+              <input
+                type="text"
+                name="department"
+                placeholder="Бухгалтерия"
+                value={formData.department}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Картридж</label>
+              <input
+                type="text"
+                name="cartridge"
+                placeholder="HP 85A"
+                value={formData.cartridge}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={`${styles.formGroup} ${styles.full}`}>
+              <label>Статус</label>
+              <select name="status" value={formData.status} onChange={handleChange}>
+                <option value="Работает">Работает</option>
+                <option value="На ремонте">На ремонте</option>
+                <option value="Не работает">Не работает</option>
+              </select>
+            </div>
+          </div>
 
           <div className={styles.modalActions}>
-            <button type="submit" className={styles.saveBtn}>
-              Сохранить
-            </button>
-
             <button type="button" className={styles.cancelBtn} onClick={closeModal}>
               Отмена
+            </button>
+            <button type="submit" className={styles.saveBtn}>
+              <FaSave />
+              Сохранить
             </button>
           </div>
         </form>
