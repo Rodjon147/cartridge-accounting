@@ -86,24 +86,28 @@ function Movement() {
 
                   <td>{movement.comment || "-"}</td>
 
-                  <td className={styles.actionsCell}>
-                    <button
-                      className={`${styles.iconBtn} ${styles.deleteIcon}`}
-                      onClick={() => deleteMovement(movement.id)}
-                    >
-                      <FiCornerRightUp />
-                    </button>
+                  <td>
+                    <div className={styles.actionsGroup}>
+                      <button
+                        className={`${styles.iconBtn} ${styles.deleteIcon}`}
+                        onClick={() => deleteMovement(movement.id)}
+                      >
+                        <FiCornerRightUp />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        {
-          isModalOpen && (
-            <AddMovementModal cartridge={movements} closeModal={() => setIsModalOpen(false)} refreshCartridges={fetchMovements()} />
-          )
-        }
+        {isModalOpen && (
+          <AddMovementModal
+            cartridge={movements}
+            closeModal={() => setIsModalOpen(false)}
+            refreshCartridges={fetchMovements()}
+          />
+        )}
       </div>
     </>
   )

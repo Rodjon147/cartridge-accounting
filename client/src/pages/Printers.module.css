@@ -4,13 +4,23 @@
 
 .tableContainer {
     background: white;
-    padding: 20px;
-    border-radius: 12px;
+    border: 1px solid #e5e3de;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
 }
 
 .cartridgeTable {
     width: 100%;
     border-collapse: collapse;
+}
+
+.cartridgeTable th {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    color: #78716c;
+    letter-spacing: 0.06em;
 }
 
 .cartridgeTable th,
@@ -20,11 +30,14 @@
     border-bottom: 1px solid #ddd;
 }
 
+.lastRow {
+    border-bottom: none;
+}
+
 .cartridgeTable th {
     background: #f3f4f6;
 }
-
-.actionsCell {
+.actionsGroup {
     display: flex;
     gap: 10px;
 }

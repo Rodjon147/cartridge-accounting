@@ -7,7 +7,7 @@ import { FaSave } from "react-icons/fa"
 function EditCartridgeModal({ cartridge, closeModal, refreshCartridges }) {
   const [formData, setFormData] = useState({
     model: cartridge.model,
-    type: cartridge.type,
+    type: cartridge.type || "Лазерный",
     printer: cartridge.printer,
     qty: cartridge.qty,
     min_qty: cartridge.min_qty,

@@ -10,7 +10,7 @@ function EditPrinterModal({ printer, closeModal, refreshPrinters }) {
     model: printer.model,
     department: printer.department,
     cartridge: printer.cartridge,
-    status: printer.status,
+    status: printer.status || "Работает",
   })
 
   const handleChange = (e) => {

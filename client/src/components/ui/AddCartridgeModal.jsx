@@ -6,13 +6,13 @@ import { FaSave } from "react-icons/fa"
 
 function AddCartridgeModal({ closeModal, refreshCartridges }) {
     const [formData, setFormData] = useState({
-        model: "",
-        type: "",
-        printer: "",
-        qty: 0,
-        min_qty: 0,
-        refill_date: "",
-        note: ""
+      model: "",
+      type: "Лазерный",
+      printer: "",
+      qty: 0,
+      min_qty: 0,
+      refill_date: "",
+      note: "",
     })
 
     const handleChange = (e) => {

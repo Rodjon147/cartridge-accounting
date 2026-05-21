@@ -10,7 +10,7 @@ function AddPrinterModal({ closeModal, refreshPrinters }) {
     model: "",
     department: "",
     cartridge: "",
-    status: "",
+    status: "Работает",
   })
 
   const handleChange = (e) => {

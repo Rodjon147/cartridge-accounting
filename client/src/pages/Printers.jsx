@@ -62,22 +62,17 @@ function Printers() {
             <thead>
               <tr>
                 <th>Название</th>
-
                 <th>Модель</th>
-
                 <th>Отдел</th>
-
                 <th>Картридж</th>
-
                 <th>Статус</th>
-
                 <th>Действия</th>
               </tr>
             </thead>
 
             <tbody>
-              {printers.map((printer) => (
-                <tr key={printer.id}>
+              {printers.map((printer, index) => (
+                <tr key={printer.id} className={index === printers.length - 1 ? styles.lastRow : ""}>
                   <td>{printer.name}</td>
 
                   <td>{printer.model}</td>
@@ -88,14 +83,19 @@ function Printers() {
 
                   <td>{printer.status}</td>
 
-                  <td className={styles.actionsCell}>
-                    <button className={`${styles.iconBtn} ${styles.editIcon}`} onClick={() => openEditModal(printer)}>
-                      <FiEdit2 />
-                    </button>
+                  <td>
+                    <div className={styles.actionsGroup}>
+                      <button className={`${styles.iconBtn} ${styles.editIcon}`} onClick={() => openEditModal(printer)}>
+                        <FiEdit2 />
+                      </button>
 
-                    <button className={`${styles.iconBtn} ${styles.deleteIcon}`} onClick={() => deletePrinter(printer.id)}>
-                      <FiTrash2 />
-                    </button>
+                      <button
+                        className={`${styles.iconBtn} ${styles.deleteIcon}`}
+                        onClick={() => deletePrinter(printer.id)}
+                      >
+                        <FiTrash2 />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

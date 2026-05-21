@@ -64,24 +64,18 @@ function Cartridges() {
             <thead>
               <tr>
                 <th>Модель</th>
-
                 <th>Тип</th>
-
                 <th>Принтер</th>
-
                 <th>Кол-во</th>
-
                 <th>Статус</th>
-
                 <th>Заправлен</th>
-
                 <th>Действия</th>
               </tr>
             </thead>
 
             <tbody>
-              {cartridges.map((cartridge) => (
-                <tr key={cartridge.id} className={cartridge.qty <= cartridge.min_qty ? "low-stock-row" : ""}>
+              {cartridges.map((cartridge, index) => (
+                <tr key={cartridge.id} className={index === cartridges.length - 1 ? styles.lastRow : ""}>
                   <td>
                     <div className={styles.cartridgeModel}>
                       <strong>{cartridge.model}</strong>
