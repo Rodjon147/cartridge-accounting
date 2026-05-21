@@ -91,6 +91,7 @@ server/
 ├── config/
 ├── db/
 └── server.js
+```
 
 # Установка проекта
 
