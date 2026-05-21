@@ -98,7 +98,7 @@ server/
 ## 1. Клонирование репозитория
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/cartridge-accounting.git
+git clone https://github.com/Rodjon147/cartridge-accounting.git
 ```
 
 ---
